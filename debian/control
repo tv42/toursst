@@ -1,0 +1,21 @@
+Source: toursst
+Section: web
+Priority: optional
+Maintainer: Tommi Virtanen <tv@debian.org>
+Standards-Version: 3.5.6
+Build-Depends-Indep: python2.2-dev
+
+Package: toursst
+Section: web
+Architecture: all
+Depends: python (>= 2.2), python (<< 2.3), python2.2-twisted
+Description: RSS channel news items where you want them
+ TouRSSt tours the web so you don't have to. Run frequently, it pulls new
+ RSS news items from a number of channels and puts them where you want.
+ .
+ Currently it can deliver news items to a Maildir, but future additions
+ will include sending over SMTP, perhaps writing out aggregated RSS
+ feeds, and so on. TouRSSt is built to be reasonably modular, so you
+ should have no problems adding your own delivery plugin, if you just
+ know a bit of Python.
+

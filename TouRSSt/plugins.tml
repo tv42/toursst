@@ -1,0 +1,25 @@
+# -*- python -*-
+
+register('maildir',
+	 "TouRSSt.writer.maildir",
+	 description="""
+         Writes RSS items as mails in maildirs.
+	 """,
+	 type="TouRSSt.writer",
+         )
+
+register('stdout',
+	 "TouRSSt.writer.stdout",
+	 description="""
+         Writes RSS items to standard output.
+	 """,
+	 type="TouRSSt.writer",
+         )
+
+register('simple',
+	 "TouRSSt.format.email.simple",
+	 description="""
+         Format an RSS item for email.
+	 """,
+	 type="TouRSSt.format.email",
+         )

@@ -1,0 +1,56 @@
+#!/usr/bin/make -f
+
+PYTHON_VERSIONS:=2.1 2.2
+PYTHON_VERSION_DEFAULT:=2.2
+
+docdir=debian/install/$(1)/usr/share/doc/$(1)
+
+build:
+binary: binary-indep binary-arch
+binary-indep: binary-indep-toursst
+binary-arch:
+
+clean:
+	test -e debian/control
+	test root = "`whoami`" || (echo need root priviledges; exit 1)
+	rm -rf build debian/install
+	find . -type f -name '*.pyc' -print0 \
+	| xargs -0 --no-run-if-empty rm --
+	rm -rf debian/substvars debian/files
+
+install: install-toursst
+
+install-toursst:
+	test -e debian/control
+	test root = "`whoami`" || (echo need root priviledges; exit 1)
+	rm -rf debian/substvars
+	install -d -m0755 'debian/install/toursst'
+	/usr/bin/python$(PYTHON_VERSION_DEFAULT) \
+		setup.py install --root='debian/install/toursst'
+	rm -rf build
+	chmod -R go-w 'debian/install/toursst'
+
+	install -d --mode=0755 '$(call docdir,toursst)'
+	install --mode=0644 \
+		README \
+		debian/copyright \
+		'$(call docdir,toursst)'
+	install --mode=0644 \
+		debian/changelog \
+		'$(call docdir,toursst)/changelog'
+	gzip -9f \
+		'$(call docdir,toursst)/README' \
+		'$(call docdir,toursst)/changelog'
+
+binary-indep-toursst: install-toursst
+	test -e debian/control
+	test root = "`whoami`" || (echo need root priviledges; exit 1)
+
+	install -d --mode=0755 'debian/install/toursst/DEBIAN'
+	dpkg-gencontrol \
+		-isp -p'toursst' -P'debian/install/toursst'
+	dpkg --build 'debian/install/toursst' ..
+
+.PHONY: build clean binary-indep binary-arch binary \
+	install install-toursst \
+	binary-indep-toursst

@@ -1,0 +1,24 @@
+This package was debianized by Tommi Virtanen tv@debian.org on
+Fri, 20 Jun 2003 22:19:39 +0300.
+
+It was originally downloaded from http://toursst.sourceforge.net/
+
+Upstream Author: Tommi Virtanen <tv@debian.org>
+
+Copyright:
+
+    TouRSSt - RSS channel news items where you want them.
+    Copyright (C) 2003  Tommi Virtanen
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2.1 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+On Debian Linux systems, the complete text of the GNU Lesser General Public
+License can be found in '/usr/share/common-licenses/LGPL'.

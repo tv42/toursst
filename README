@@ -1,0 +1,85 @@
+TouRSSt -- RSS channel news items where you want them.
+
+  Tourist \Tour"ist\, n.
+     One who makes a tour, or performs a journey in a circuit.
+
+TouRSSt tours the web so you don't have to. Run frequently, it pulls
+new RSS news items from a number of channels and puts them where you
+want.
+
+Currently it can deliver news items to a Maildir, but future additions
+will include sending over SMTP, perhaps writing out aggregated RSS
+feeds, and so on. TouRSSt is built to be reasonably modular, so you
+should have no problems adding your own delivery plugin, if you just
+know a bit of Python.
+
+
+Motivation:
+
+1. News should come to you.
+
+2. You should have control, not some company 
+   on the other side of the net.
+
+3. News are news only once.
+
+4. Reading a two-week backlog of Slashdot with
+   a browser sucks.
+
+
+Status:
+
+TouRSSt is now at a stage where I am ready to stop reading Slashdot
+through a browser.
+
+
+Getting Started:
+
+1. Galeon users:
+
+   - Make a folder in your bookmarks called "RSS". Put bookmarks
+     pointing to RSS resources in it.
+
+   - Make a maildir ~/Maildir (maildirmake may be useful)
+
+   - Run toursst
+
+   - Read mail in ~/Maildir/.TouRSSt.*
+
+2. Users of other XBEL-compliant web browsers:
+
+   - Follow the instructions for Galeon users, but specify location of
+     your bookmarks with --bookmark-file=PATH.
+
+3. Users of other popular browsers:
+
+   - Follow the instructions for Galeon users, except after editing
+     your bookmarks, export then as XBEL or convert with an external
+     utility. Give path to this file to toursst with
+     --bookmark-file=PATH.
+
+If you don't want to mess with your bookmarks, you can just write XBEL
+by hand. This should get you started:
+
+<?xml version="1.0"?>
+<xbel version="1.0">
+  <title>My XBEL kludge</title>
+  <folder>
+    <title>RSS</title>
+    <bookmark href="http://www.example.com/news.rss">
+      <title>Example News</title>
+    </bookmark>
+    <bookmark href="http://boingboing.net/rss.xml">
+      <title>Boing Boing</title>
+    </bookmark>
+  </folder>
+</xbel>
+
+
+
+License:
+
+GNU General Public License.
+
+
+Tommi Virtanen <tv@debian.org>
