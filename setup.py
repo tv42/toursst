@@ -2,10 +2,21 @@
 
 #debian-section: web
 
+import os.path
 from distutils.core import setup, Extension
+from distutils.sysconfig import get_python_lib
+
+def version():
+    header = file('debian/changelog').readline()
+    source, version, dummy = header.split(None, 2)
+    if version.startswith('(') and version.endswith(')'):
+        return version[1:-1]
+    else:
+        return None
 
 if __name__=='__main__':
     setup(name="toursst",
+          version=version(),
 	  description="RSS channel news items where you want them",
 	  long_description="""
 
@@ -23,7 +34,23 @@ know a bit of Python.
 	  author="Tommi Virtanen",
 	  author_email="tv@debian.org",
 	  url="http://toursst.sourceforge.net/",
-	  licence="GNU GPL",
+	  license="GNU GPL",
+          platforms = ["any"],
+
+          classifiers = [
+        'Development Status :: 4 - Beta',
+        'Environment :: Console',
+        'Environment :: No Input/Output (Daemon)',
+        'Intended Audience :: End Users/Desktop',
+        'License :: DFSG approved',
+        'License :: OSI Approved :: GNU General Public License (GPL)',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Topic :: Communications :: Email',
+        'Topic :: Internet :: WWW/HTTP',
+        'Topic :: Internet :: WWW/HTTP :: Dynamic Content :: News/Diary',
+        'Topic :: Office/Business :: News/Diary',
+        ],
 
 	  packages=[
 	"TouRSSt",
@@ -34,6 +61,6 @@ know a bit of Python.
 	  scripts=[
 	"toursst",
 	],
-          data_files=[('lib/python2.2/site-packages/TouRSSt',
+          data_files=[(os.path.join(get_python_lib(), 'TouRSSt'),
                        ["TouRSSt/plugins.tml"])],
 	  )

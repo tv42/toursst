@@ -1,3 +1,16 @@
+toursst (0.0.3) unstable; urgency=low
+
+  * Switch to python2.3.
+  * Build using cdbs.
+  * Depend on the latest python, to ensure sane APIs.
+  * Fix typo, do not hardcode python version in setup.py.
+  * Provide version information parsed from debian/changelog to
+    distutils.
+  * Add Trove classifiers.
+  * Add platforms metadata to setup.py
+
+ -- Tommi Virtanen <tv@debian.org>  Sun,  2 Nov 2003 15:21:30 +0200
+
 toursst (0.0.2) unstable; urgency=low
 
   * First public release.
