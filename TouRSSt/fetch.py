@@ -8,7 +8,7 @@ import errno
 import os
 import os.path
 
-from twisted.internet import reactor, error, defer
+from twisted.internet import reactor, defer
 from twisted.web import microdom, client, domhelpers
 
 from TouRSSt import log
