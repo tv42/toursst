@@ -8,10 +8,12 @@ import formatter
 import string
 import time
 import os
+import itertools
 
 from TouRSSt.format.email import base
 
 starttime=int(time.time())
+counter = itertools.count(1)
 
 forbidden = {'description': 1}
 
@@ -38,9 +40,8 @@ class TouRSStFormatterEmailSimple(base.TouRSStFormatterEmailBase):
 
     def _msgid(self):
         import socket
-        # TODO uniqueness!
-        return 'toursst.%i.%i@%s'\
-               %(os.getpid(), starttime,
+        return 'toursst.%i.%i.%s@%s'\
+               %(os.getpid(), starttime, next(counter),
                  socket.gethostbyaddr(socket.gethostname())[0])
 
     def _headers(self, item, feed, date):
