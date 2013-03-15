@@ -51,3 +51,5 @@ class TouRSStFormatterEmailMIME(simple.TouRSStFormatterEmailSimple):
         r=out.getvalue()
         out.close()
         return r
+
+toursstFormatter = TouRSStFormatterEmailMIME
