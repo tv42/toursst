@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """
 Writes RSS items as mails in maildirs.
 """
@@ -48,10 +50,13 @@ class TouRSStWriterMaildir(base.TouRSStWriterBase):
 
                 folder=config['folder']
                 if config['feeds-in-folders']:
+                    name = string.strip(self.feed.name).decode('utf-8')
+                    segments = name.split(u'·')
                     folder=mailfolder_join(
                         folder,
-                        safefilenames.makesafe(
-                        string.strip(self.feed.name)))
+                        *(safefilenames.makesafe(seg.encode('utf-8'))
+                          for seg in segments)
+                        )
                     log.chatty('Storing to Maildir', config['maildir'],
                                folder
                                and 'folder '+folder
