@@ -95,7 +95,7 @@ class TouRSStApp:
             for feed, d in deferreds:
                 d.addErrback(self._reportError, feed)
             dl.addBoth(lambda _, writer: writer.stopWriting(), writer)
-            dl.addBoth(lambda _: reactor.stop())
+            dl.addBoth(lambda _: reactor.callWhenRunning(reactor.stop))
             reactor.run()
         except KeyboardInterrupt:
             print >>sys.stderr, '%s: interrupted.' % sys.argv[0]
