@@ -1,4 +1,7 @@
-from twisted.python import plugin, usage
+"""
+Writes RSS items to standard output.
+"""
+
 from TouRSSt.writer import base
 
 class TouRSStWriterStdout(base.TouRSStWriterBase):
@@ -7,12 +10,9 @@ class TouRSStWriterStdout(base.TouRSStWriterBase):
     def __init__(self, config):
         base.TouRSStWriterBase.__init__(self, config)
         self.formatter = None
-        for plug in plugin.getPlugIns('TouRSSt.format.email'):
-            if plug.name == 'simple':
-                module = plug.load()
-                klass = getattr(module, 'toursstFormatter')
-                self.formatter = klass()
-                break
+        module = __import__('TouRSSt.format.email.simple', fromlist=[''])
+        klass = getattr(module, 'toursstFormatter')
+        self.formatter = klass()
         if self.formatter is None:
             raise 'unable to load email formatter: %r' % 'simple'
 

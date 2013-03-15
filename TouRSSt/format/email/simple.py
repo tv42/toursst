@@ -1,3 +1,7 @@
+"""
+Format an RSS item for email.
+"""
+
 import cStringIO
 import htmllib
 import formatter

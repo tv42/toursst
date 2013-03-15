@@ -1,3 +1,7 @@
+"""
+Writes RSS items as mails in maildirs.
+"""
+
 import time
 import os
 import os.path
@@ -6,7 +10,6 @@ import string
 from TouRSSt.writer import base
 from TouRSSt import safefilenames, log
 
-from twisted.python import plugin
 from twisted.mail import maildir
 
 starttime=int(time.time())
@@ -30,12 +33,9 @@ class TouRSStWriterMaildir(base.TouRSStWriterBase):
     def __init__(self, config):
         base.TouRSStWriterBase.__init__(self, config)
         self.formatter = None
-        for plug in plugin.getPlugIns('TouRSSt.format.email'):
-            if plug.name == self.config['maildir-formatter']:
-                module = plug.load()
-                klass = getattr(module, 'toursstFormatter')
-                self.formatter = klass()
-                break
+        module = __import__('TouRSSt.format.email.{0}'.format(self.config['maildir-formatter']), fromlist=[''])
+        klass = getattr(module, 'toursstFormatter')
+        self.formatter = klass()
         if self.formatter is None:
             raise 'unable to load email formatter: %r' % (self.config['maildir-formatter'])
         self.foldersSeen = {}

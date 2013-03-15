@@ -2,7 +2,7 @@ import string
 import sys
 import os.path
 
-from twisted.python import usage, plugin
+from twisted.python import usage
 from twisted.internet import reactor, defer
 
 from TouRSSt import fetch, log, xbel
@@ -36,11 +36,11 @@ class TouRSStOptions(usage.Options):
         self['verbosity'] = 0 # default
 
         self.subCommands = []
-        for plug in plugin.getPlugIns('TouRSSt.writer'):
-            module = plug.load()
+        for kludge in ['stdout', 'maildir']:
+            module = __import__('TouRSSt.writer.{0}'.format(kludge), fromlist=[''])
             options = getattr(module, 'Options')
             self.subCommands.append((
-                plug.name, None, options, plug.description))
+                kludge, None, options, module.__doc__))
 
     def opt_verbose(self):
         """Be more verbose"""
