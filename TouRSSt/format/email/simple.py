@@ -80,8 +80,8 @@ class TouRSStFormatterEmailSimple(base.TouRSStFormatterEmailBase):
     def format(self, item, feed):
         date=time.time() #TODO
         return string.join(
-            map(lambda keyval: string.join(keyval, ': '),
-                self._headers(item, feed, date)),
+            ('{k}: {v}'.format(k=k, v=v.replace('\n', ' ').replace('\r', ' '))
+             for k,v in self._headers(item, feed, date)),
             '\n')+'\n'+'\n'+self._body(item, feed, date)
 
 
