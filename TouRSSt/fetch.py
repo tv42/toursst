@@ -242,7 +242,7 @@ class TouRSStFeed:
             d = defer.succeed(self.feed)
             d.addCallback(_slurp)
 
-            # fall back to network use if local fail is broken or missing
+            # fall back to network use if local file is broken or missing
             d.addErrback(lambda _, url: client.getPage(url), self.feed)
         else:
             d = client.getPage(self.feed)
